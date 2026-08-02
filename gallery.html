@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GALLERY ― RING NOTE</title>
+<meta name="description" content="格闘技学習帳「RING NOTE」のギャラリー。技のスケッチや観戦メモ、道具の記録など。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: #c31432;
+    --red-deep: #8f0f24;
+    --blue: #16305c;
+    --blue-deep: #0d1e3d;
+    --towel: #faf8f3;
+    --canvas: #16181c;
+    --ink: #232323;
+    --ink-soft: #5a5a5a;
+    --gold: #c9a24b;
+    --line: rgba(0,0,0,0.08);
+    --maxw: 1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP', sans-serif;
+    color:var(--ink);
+    background:var(--towel);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'Oswald', sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    font-weight:600;
+    text-transform:uppercase;
+  }
+
+  /* ===== ROPE + TOWEL HEADER ===== */
+  .rope{
+    height:14px; width:100%;
+    background:repeating-linear-gradient(90deg, var(--red) 0 46px, var(--towel) 46px 92px, var(--blue) 92px 138px, var(--towel) 138px 184px);
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.25), inset 0 -2px 3px rgba(0,0,0,0.15);
+  }
+  .rope.thin{height:6px;}
+  header{position:relative; background:var(--canvas); overflow:visible;}
+  .header-inner{max-width:var(--maxw); margin:0 auto; padding:0 28px 26px; position:relative;}
+  .towel{
+    position:relative; margin:-2px auto 0; width:min(340px, 78%);
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 2px, transparent 2px 5px), linear-gradient(180deg, #ffffff, var(--towel));
+    box-shadow: 0 18px 34px rgba(0,0,0,0.45), 0 2px 0 rgba(0,0,0,0.05) inset;
+    transform: rotate(-1.4deg); transform-origin: top center;
+    padding:20px 22px 26px; border-radius:2px 2px 0 0;
+  }
+  .towel::before{
+    content:""; position:absolute; top:10px; left:14px; right:14px; height:5px;
+    background: repeating-linear-gradient(90deg, var(--red) 0 18px, transparent 18px 22px, var(--blue) 22px 40px, transparent 40px 44px);
+    opacity:0.85;
+  }
+  .towel::after{
+    content:""; position:absolute; left:0; right:0; bottom:-9px; height:12px;
+    background-image: linear-gradient(135deg, var(--towel) 50%, transparent 50%), linear-gradient(-135deg, var(--towel) 50%, transparent 50%);
+    background-size: 11px 12px; background-position: 0 0, 0 0; background-repeat: repeat-x;
+    filter: drop-shadow(0 3px 2px rgba(0,0,0,0.25));
+  }
+  .towel h1{
+    font-family:'Zen Kaku Gothic New', sans-serif; font-weight:900;
+    font-size: clamp(1.5rem, 4.6vw, 2.05rem); letter-spacing: 0.02em;
+    text-align:center; color:var(--ink); padding-top:6px;
+  }
+  .towel h1 span{
+    display:block; font-family:'Oswald', sans-serif; font-weight:700;
+    font-size:0.85rem; letter-spacing:0.32em; color:var(--ink-soft); margin-top:8px;
+  }
+  nav{padding:38px 0 20px;}
+  nav ul{list-style:none; display:flex; justify-content:center; gap:6px; flex-wrap:wrap;}
+  nav a{
+    font-family:'Oswald', sans-serif; font-size:0.82rem; letter-spacing:0.12em; color:#e9e9ea;
+    padding:9px 18px; border:1px solid rgba(255,255,255,0.18); border-radius:999px; transition: all .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{ border-color:var(--red); background:rgba(195,20,50,0.18); color:#fff; }
+  nav a.current{background:var(--red); border-color:var(--red); color:#fff;}
+
+  /* ===== PAGE HERO ===== */
+  .page-hero{
+    background:linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 46%, var(--blue) 50%, var(--red-deep) 54%, var(--red) 100%);
+    padding:52px 0 46px; color:#fff;
+  }
+  .page-hero .eyebrow{color:#ffe3b0; opacity:0.9;}
+  .page-hero h2{
+    font-family:'Zen Kaku Gothic New', sans-serif; font-weight:900;
+    font-size:clamp(1.6rem, 4.4vw, 2.3rem); margin-top:10px;
+  }
+  .page-hero p{margin-top:12px; max-width:52ch; color:#f1eee6; opacity:0.94; font-size:0.95rem;}
+
+  /* ===== GALLERY ===== */
+  .gallery-section{padding:64px 0 80px; background:var(--towel);}
+  .filter-note{
+    font-family:'Roboto Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-bottom:30px;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--line);
+  }
+  .g-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:22px;
+  }
+  .g-item{
+    background:#fff;
+    border:1px solid var(--line);
+  }
+  .g-thumb{
+    aspect-ratio:4/3;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .g-thumb.t1{background:linear-gradient(135deg, var(--blue-deep), var(--blue));}
+  .g-thumb.t2{background:linear-gradient(135deg, var(--red-deep), var(--red));}
+  .g-thumb.t3{background:linear-gradient(135deg, #2a2a2a, #454545);}
+  .g-thumb.t4{background:linear-gradient(135deg, var(--blue), var(--red-deep));}
+  .g-thumb.t5{background:linear-gradient(135deg, #3a3a3a, var(--blue-deep));}
+  .g-thumb.t6{background:linear-gradient(135deg, var(--red), #3a3a3a);}
+  .g-thumb::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 14px);
+  }
+  .g-thumb .mark{
+    position:relative;
+    font-family:'Oswald', sans-serif;
+    color:rgba(255,255,255,0.85);
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    border:1px solid rgba(255,255,255,0.5);
+    padding:6px 14px;
+  }
+  .g-caption{padding:16px 18px 20px;}
+  .g-caption .cat{
+    font-family:'Roboto Mono', monospace;
+    font-size:0.68rem;
+    color:var(--red);
+    letter-spacing:0.06em;
+  }
+  .g-caption h4{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700;
+    font-size:1.02rem;
+    margin-top:6px;
+  }
+  .g-caption p{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+  .g-note{
+    margin-top:44px;
+    text-align:center;
+    font-family:'Oswald', sans-serif;
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+  }
+
+  /* footer */
+  footer{background:var(--canvas); color:#cfcfd2; padding:50px 0 30px;}
+  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; padding-bottom:30px;}
+  footer h5{font-family:'Zen Kaku Gothic New', sans-serif; color:#fff; font-size:1.05rem; margin-bottom:6px;}
+  footer .sub{font-family:'Oswald', sans-serif; font-size:0.72rem; letter-spacing:0.14em; color:#8d8d92;}
+  footer nav ul{justify-content:flex-start; padding:0; gap:22px;}
+  footer nav a{border:none; padding:0; font-size:0.8rem; color:#cfcfd2;}
+  footer nav a:hover{color:#fff; background:none;}
+  .copyright{
+    font-family:'Roboto Mono', monospace; font-size:0.72rem; color:#6f6f74;
+    border-top:1px solid rgba(255,255,255,0.08); padding-top:20px;
+  }
+
+  @media (max-width:600px){
+    .gallery-section{padding:44px 0 60px;}
+    .footer-grid{flex-direction:column;}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="towel">
+      <h1>RING NOTE<span>格闘技学習帳</span></h1>
+    </div>
+  </div>
+  <div class="rope"></div>
+  <nav aria-label="サイト内ナビゲーション">
+    <ul>
+      <li><a href="index.html">TOP</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html" class="current">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Gallery</p>
+    <h2>スケッチと記録の断片。</h2>
+    <p>試合観戦のメモ、技を理解するために描いた図解、道具や会場の記録など。文章だけでは残せないものをここに置いていきます。</p>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <div class="wrap">
+    <p class="filter-note">ALL ENTRIES ― 6 items</p>
+    <div class="g-grid">
+
+      <div class="g-item">
+        <div class="g-thumb t1"><span class="mark">Sketch</span></div>
+        <div class="g-caption">
+          <p class="cat">柔道 ／ 技術図解</p>
+          <h4>大外刈りの重心図</h4>
+          <p>崩し・作り・掛けの三段階を、体重移動の矢印付きで描いた図解メモ。</p>
+        </div>
+      </div>
+
+      <div class="g-item">
+        <div class="g-thumb t2"><span class="mark">Notes</span></div>
+        <div class="g-caption">
+          <p class="cat">ボクシング ／ 観戦メモ</p>
+          <h4>試合観戦スケッチ</h4>
+          <p>ジャブからのコンビネーションの軌道を、試合中に手描きで追ったメモ。</p>
+        </div>
+      </div>
+
+      <div class="g-item">
+        <div class="g-thumb t3"><span class="mark">Gear</span></div>
+        <div class="g-caption">
+          <p class="cat">ムエタイ ／ 道具記録</p>
+          <h4>グローブとテーピング</h4>
+          <p>練習見学で見せてもらった、拳の巻き方の手順をメモしたスケッチ。</p>
+        </div>
+      </div>
+
+      <div class="g-item">
+        <div class="g-thumb t4"><span class="mark">Diagram</span></div>
+        <div class="g-caption">
+          <p class="cat">MMA ／ ポジション図</p>
+          <h4>マウントとガードの図</h4>
+          <p>寝技の基本ポジションを、上から見た配置図として整理したもの。</p>
+        </div>
+      </div>
+
+      <div class="g-item">
+        <div class="g-thumb t5"><span class="mark">Venue</span></div>
+        <div class="g-caption">
+          <p class="cat">全般 ／ 会場記録</p>
+          <h4>リングとロープの構造</h4>
+          <p>初めて生観戦した会場で気になった、リングのロープの張り方のメモ。</p>
+        </div>
+      </div>
+
+      <div class="g-item">
+        <div class="g-thumb t6"><span class="mark">Sketch</span></div>
+        <div class="g-caption">
+          <p class="cat">キックボクシング ／ 技術図解</p>
+          <h4>ローキックの軌道</h4>
+          <p>腰の回転から蹴り足までの流れを、連続コマ風に描いたスケッチ。</p>
+        </div>
+      </div>
+
+    </div>
+    <p class="g-note">※ 随時追加予定。今後は実際の写真・スケッチ画像に差し替えていきます。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>RING NOTE</h5>
+        <p class="sub">格闘技学習帳 by Azalea Creative Room</p>
+      </div>
+      <nav aria-label="フッターナビゲーション">
+        <ul>
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="blog.html">BLOG</a></li>
+          <li><a href="gallery.html">GALLERY</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="rope thin"></div>
+    <p class="copyright" style="margin-top:20px;">© 2026 RING NOTE ― Azalea Creative Room. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
