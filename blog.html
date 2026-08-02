@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOG ― RING NOTE</title>
+<meta name="description" content="格闘技学習帳「RING NOTE」の日記。気づいたこと、調べたことをその日ごとに記録。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: #c31432;
+    --red-deep: #8f0f24;
+    --blue: #16305c;
+    --blue-deep: #0d1e3d;
+    --towel: #faf8f3;
+    --canvas: #16181c;
+    --ink: #232323;
+    --ink-soft: #5a5a5a;
+    --gold: #c9a24b;
+    --line: rgba(0,0,0,0.08);
+    --maxw: 1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP', sans-serif;
+    color:var(--ink);
+    background:var(--towel);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:'Oswald', sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    font-weight:600;
+    text-transform:uppercase;
+  }
+  .jp-display{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+  }
+
+  /* ===== ROPE + TOWEL HEADER ===== */
+  .rope{
+    height:14px;
+    width:100%;
+    background:repeating-linear-gradient(
+      90deg,
+      var(--red) 0 46px,
+      var(--towel) 46px 92px,
+      var(--blue) 92px 138px,
+      var(--towel) 138px 184px
+    );
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.25), inset 0 -2px 3px rgba(0,0,0,0.15);
+  }
+  .rope.thin{height:6px;}
+
+  header{
+    position:relative;
+    background:var(--canvas);
+    overflow:visible;
+  }
+  .header-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px 26px;
+    position:relative;
+  }
+  .towel{
+    position:relative;
+    margin:-2px auto 0;
+    width:min(340px, 78%);
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 2px, transparent 2px 5px),
+      linear-gradient(180deg, #ffffff, var(--towel));
+    box-shadow: 0 18px 34px rgba(0,0,0,0.45), 0 2px 0 rgba(0,0,0,0.05) inset;
+    transform: rotate(-1.4deg);
+    transform-origin: top center;
+    padding:20px 22px 26px;
+    border-radius:2px 2px 0 0;
+  }
+  .towel::before{
+    content:"";
+    position:absolute;
+    top:10px; left:14px; right:14px;
+    height:5px;
+    background: repeating-linear-gradient(90deg, var(--red) 0 18px, transparent 18px 22px, var(--blue) 22px 40px, transparent 40px 44px);
+    opacity:0.85;
+  }
+  .towel::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-9px;
+    height:12px;
+    background-image: linear-gradient(135deg, var(--towel) 50%, transparent 50%),
+                       linear-gradient(-135deg, var(--towel) 50%, transparent 50%);
+    background-size: 11px 12px;
+    background-position: 0 0, 0 0;
+    background-repeat: repeat-x;
+    filter: drop-shadow(0 3px 2px rgba(0,0,0,0.25));
+  }
+  .towel h1{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size: clamp(1.5rem, 4.6vw, 2.05rem);
+    letter-spacing: 0.02em;
+    text-align:center;
+    color:var(--ink);
+    padding-top:6px;
+  }
+  .towel h1 span{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:0.85rem;
+    letter-spacing:0.32em;
+    color:var(--ink-soft);
+    margin-top:8px;
+  }
+
+  nav{padding:38px 0 20px;}
+  nav ul{list-style:none; display:flex; justify-content:center; gap:6px; flex-wrap:wrap;}
+  nav a{
+    font-family:'Oswald', sans-serif;
+    font-size:0.82rem;
+    letter-spacing:0.12em;
+    color:#e9e9ea;
+    padding:9px 18px;
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:999px;
+    transition: all .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{
+    border-color:var(--red);
+    background:rgba(195,20,50,0.18);
+    color:#fff;
+  }
+  nav a.current{background:var(--red); border-color:var(--red); color:#fff;}
+
+  /* ===== PAGE HERO (compact) ===== */
+  .page-hero{
+    background:linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 46%, var(--blue) 50%, var(--red-deep) 54%, var(--red) 100%);
+    padding:52px 0 46px;
+    color:#fff;
+  }
+  .page-hero .eyebrow{color:#ffe3b0; opacity:0.9;}
+  .page-hero h2{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size:clamp(1.6rem, 4.4vw, 2.3rem);
+    margin-top:10px;
+  }
+  .page-hero p{margin-top:12px; max-width:52ch; color:#f1eee6; opacity:0.94; font-size:0.95rem;}
+
+  /* ===== DIARY LIST ===== */
+  .diary{padding:64px 0 80px; background:var(--towel);}
+  .diary-list{max-width:760px; margin:0 auto;}
+  .entry{
+    position:relative;
+    padding:26px 0 26px 26px;
+    border-bottom:1px dashed var(--line);
+  }
+  .entry:first-child{padding-top:0;}
+  .entry:last-child{border-bottom:none;}
+  .entry::before{
+    content:"";
+    position:absolute;
+    left:0; top:32px;
+    width:10px; height:10px;
+    border-radius:50%;
+  }
+  .entry.red::before{background:var(--red);}
+  .entry.blue::before{background:var(--blue);}
+  .entry::after{
+    content:"";
+    position:absolute;
+    left:4px; top:42px; bottom:0;
+    width:1px;
+    background:var(--line);
+  }
+  .entry:last-child::after{display:none;}
+  .entry .date{
+    font-family:'Roboto Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.05em;
+  }
+  .entry.red .date{color:var(--red);}
+  .entry.blue .date{color:var(--blue);}
+  .entry p.body-text{
+    margin-top:10px;
+    font-size:0.97rem;
+    color:var(--ink);
+    max-width:60ch;
+  }
+
+  /* footer */
+  footer{background:var(--canvas); color:#cfcfd2; padding:50px 0 30px;}
+  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; padding-bottom:30px;}
+  footer h5{font-family:'Zen Kaku Gothic New', sans-serif; color:#fff; font-size:1.05rem; margin-bottom:6px;}
+  footer .sub{font-family:'Oswald', sans-serif; font-size:0.72rem; letter-spacing:0.14em; color:#8d8d92;}
+  footer nav ul{justify-content:flex-start; padding:0; gap:22px;}
+  footer nav a{border:none; padding:0; font-size:0.8rem; color:#cfcfd2;}
+  footer nav a:hover{color:#fff; background:none;}
+  .copyright{
+    font-family:'Roboto Mono', monospace;
+    font-size:0.72rem;
+    color:#6f6f74;
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:20px;
+  }
+
+  @media (max-width:600px){
+    .diary{padding:44px 0 60px;}
+    .footer-grid{flex-direction:column;}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="towel">
+      <h1>RING NOTE<span>格闘技学習帳</span></h1>
+    </div>
+  </div>
+  <div class="rope"></div>
+  <nav aria-label="サイト内ナビゲーション">
+    <ul>
+      <li><a href="index.html">TOP</a></li>
+      <li><a href="blog.html" class="current">BLOG</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Diary</p>
+    <h2>日々の気づきを、そのまま記録する。</h2>
+    <p>試合を見て感じたこと、調べて知った用語、練習見学で教わったコツ。日付と一緒に、その日のぶんだけ書いていきます。</p>
+  </div>
+</section>
+
+<section class="diary">
+  <div class="wrap">
+    <div class="diary-list">
+
+      <div class="entry red">
+        <p class="date">2026.08.01</p>
+        <p class="body-text">ジャブの役割は「攻撃」より「管理」だと知った日。距離・リズム・視界、三つ同時にコントロールする技だった。今まで軽いパンチだと思っていたのが恥ずかしい。</p>
+      </div>
+
+      <div class="entry blue">
+        <p class="date">2026.07.24</p>
+        <p class="body-text">柔道の「崩し」を初めてちゃんと理解できた気がする。力で投げるのではなく、先に体勢を崩しておいてから技をかける発想。相撲とも通じる部分がありそう。</p>
+      </div>
+
+      <div class="entry red">
+        <p class="date">2026.07.15</p>
+        <p class="body-text">ムエタイのテーピングと蹴りの脛の使い方について、練習見学で教わったことをまとめた。脛でガードすること自体が攻撃にも防御にもなるという発想が面白かった。</p>
+      </div>
+
+      <div class="entry blue">
+        <p class="date">2026.07.08</p>
+        <p class="body-text">総合格闘技の試合を見ていて、打撃から組み技への切り替えのタイミングがまだ全然わからない。次は「テイクダウンの入り方」について調べてみる。</p>
+      </div>
+
+      <div class="entry red">
+        <p class="date">2026.06.29</p>
+        <p class="body-text">ボクシングのカウンターの基本形を整理。相手の攻撃に対して「避ける＋打つ」を同時に行うのではなく、避けた反動をそのまま打撃に変換するイメージだと理解した。</p>
+      </div>
+
+      <div class="entry blue">
+        <p class="date">2026.06.20</p>
+        <p class="body-text">ブラジリアン柔術の基本ポジションを表にしてみた。マウント、ガード、サイドコントロールなど、名前だけ知っていたものがようやく繋がってきた。</p>
+      </div>
+
+      <div class="entry red">
+        <p class="date">2026.06.12</p>
+        <p class="body-text">キックボクシングのローキックとミドルキックの狙いの違いをメモ。ローは足を削る、ミドルは体幹を崩す、目的が明確に違うことに納得した。</p>
+      </div>
+
+      <div class="entry blue">
+        <p class="date">2026.06.03</p>
+        <p class="body-text">このブログをはじめた日。格闘技は種目ごとにルールも哲学も違う。観るだけでは気づけなかったことを、ここに書き留めていこうと思う。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>RING NOTE</h5>
+        <p class="sub">格闘技学習帳 by Azalea Creative Room</p>
+      </div>
+      <nav aria-label="フッターナビゲーション">
+        <ul>
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="blog.html">BLOG</a></li>
+          <li><a href="gallery.html">GALLERY</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="rope thin"></div>
+    <p class="copyright" style="margin-top:20px;">© 2026 RING NOTE ― Azalea Creative Room. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
