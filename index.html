@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RING NOTE ― 格闘技学習帳</title>
+<meta name="description" content="ボクシングから柔術まで、格闘技をいちから学ぶ個人study log「RING NOTE」。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: #c31432;
+    --red-deep: #8f0f24;
+    --blue: #16305c;
+    --blue-deep: #0d1e3d;
+    --towel: #faf8f3;
+    --canvas: #16181c;
+    --ink: #232323;
+    --ink-soft: #5a5a5a;
+    --gold: #c9a24b;
+    --line: rgba(0,0,0,0.08);
+    --maxw: 1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP', sans-serif;
+    color:var(--ink);
+    background:var(--towel);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:'Oswald', sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    font-weight:600;
+    text-transform:uppercase;
+  }
+
+  .jp-display{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+  }
+
+  /* ===== ROPE + TOWEL HEADER ===== */
+  .rope{
+    height:14px;
+    width:100%;
+    background:repeating-linear-gradient(
+      90deg,
+      var(--red) 0 46px,
+      var(--towel) 46px 92px,
+      var(--blue) 92px 138px,
+      var(--towel) 138px 184px
+    );
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.25), inset 0 -2px 3px rgba(0,0,0,0.15);
+  }
+  .rope.thin{height:6px;}
+
+  header{
+    position:relative;
+    background:var(--canvas);
+    padding-top:0;
+    overflow:visible;
+  }
+  .header-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px 26px;
+    position:relative;
+  }
+
+  /* towel draped over the rope */
+  .towel{
+    position:relative;
+    margin:-2px auto 0;
+    width:min(340px, 78%);
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 2px, transparent 2px 5px),
+      linear-gradient(180deg, #ffffff, var(--towel));
+    box-shadow:
+      0 18px 34px rgba(0,0,0,0.45),
+      0 2px 0 rgba(0,0,0,0.05) inset;
+    transform: rotate(-1.4deg);
+    transform-origin: top center;
+    padding:20px 22px 26px;
+    border-radius:2px 2px 0 0;
+  }
+  .towel::before{
+    /* stitched stripe near top */
+    content:"";
+    position:absolute;
+    top:10px; left:14px; right:14px;
+    height:5px;
+    background: repeating-linear-gradient(90deg, var(--red) 0 18px, transparent 18px 22px, var(--blue) 22px 40px, transparent 40px 44px);
+    opacity:0.85;
+  }
+  .towel::after{
+    /* frayed bottom fringe */
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-9px;
+    height:12px;
+    background-image: linear-gradient(135deg, var(--towel) 50%, transparent 50%),
+                       linear-gradient(-135deg, var(--towel) 50%, transparent 50%);
+    background-size: 11px 12px;
+    background-position: 0 0, 0 0;
+    background-repeat: repeat-x;
+    filter: drop-shadow(0 3px 2px rgba(0,0,0,0.25));
+  }
+  .towel h1{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size: clamp(1.5rem, 4.6vw, 2.05rem);
+    letter-spacing: 0.02em;
+    text-align:center;
+    color:var(--ink);
+    padding-top:6px;
+  }
+  .towel h1 span{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:0.85rem;
+    letter-spacing:0.32em;
+    color:var(--ink-soft);
+    margin-top:8px;
+  }
+
+  nav{
+    padding:38px 0 20px;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+  nav a{
+    font-family:'Oswald', sans-serif;
+    font-size:0.82rem;
+    letter-spacing:0.12em;
+    color:#e9e9ea;
+    padding:9px 18px;
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:999px;
+    transition: all .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{
+    border-color:var(--red);
+    background:rgba(195,20,50,0.18);
+    color:#fff;
+  }
+  nav a.current{
+    background:var(--red);
+    border-color:var(--red);
+    color:#fff;
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:
+      linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 46%, var(--blue) 50%, var(--red-deep) 54%, var(--red) 100%);
+    padding:76px 0 84px;
+    color:#fff;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(circle at 18% 30%, rgba(255,255,255,0.06), transparent 40%),
+                       radial-gradient(circle at 82% 70%, rgba(255,255,255,0.05), transparent 40%);
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative;
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:26px;
+  }
+  .hero .eyebrow{color:#ffe3b0; opacity:0.9;}
+  .hero h2{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size:clamp(1.9rem, 5.4vw, 3.1rem);
+    line-height:1.35;
+    margin-top:10px;
+    max-width:15ch;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.35);
+  }
+  .hero p.lead{
+    max-width:46ch;
+    font-size:1rem;
+    color:#f1eee6;
+    opacity:0.94;
+  }
+  .hero-card{
+    margin-top:14px;
+    background:var(--towel);
+    color:var(--ink);
+    padding:22px 24px;
+    max-width:480px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.35);
+    position:relative;
+  }
+  .hero-card::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:5px;
+    background:linear-gradient(180deg, var(--red), var(--blue));
+  }
+  .hero-card .round{
+    font-family:'Roboto Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+  }
+  .hero-card p{margin-top:8px; font-size:0.95rem;}
+
+  /* ===== SECTION SHARED ===== */
+  section{padding:68px 0;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:34px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:14px;
+  }
+  .section-head .num{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    color:var(--red);
+  }
+  .section-head h3{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size:1.5rem;
+  }
+  .section-head .sub{
+    margin-left:auto;
+    font-family:'Oswald', sans-serif;
+    font-size:0.75rem;
+    letter-spacing:0.12em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+
+  /* intro statement */
+  .intro{background:var(--towel);}
+  .intro .wrap{max-width:720px;}
+  .intro p{font-size:1.02rem; color:var(--ink);}
+  .intro p + p{margin-top:16px;}
+
+  /* disciplines grid */
+  .disciplines{background:#fff;}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:18px;
+  }
+  .card{
+    border:1px solid var(--line);
+    padding:22px 20px 20px;
+    position:relative;
+    background:var(--towel);
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 26px rgba(0,0,0,0.12);
+  }
+  .card.corner-red{border-top:4px solid var(--red);}
+  .card.corner-blue{border-top:4px solid var(--blue);}
+  .card .tag{
+    font-family:'Roboto Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    display:inline-block;
+    padding:3px 9px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    margin-bottom:12px;
+  }
+  .card h4{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700;
+    font-size:1.12rem;
+    margin-bottom:8px;
+  }
+  .card p{font-size:0.88rem; color:var(--ink-soft);}
+
+  /* belt divider */
+  .belt-section{
+    background:var(--towel);
+    padding:14px 0 46px;
+    text-align:center;
+  }
+  .belt-caption{
+    font-family:'Oswald', sans-serif;
+    font-size:0.75rem;
+    letter-spacing:0.18em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  .belt-caption strong{
+    display:block;
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:0;
+    color:var(--ink);
+    text-transform:none;
+    margin-top:4px;
+  }
+  .belt-wrap{
+    position:relative;
+    height:96px;
+    max-width:520px;
+    margin:0 auto;
+  }
+  .belt-strip{
+    position:absolute;
+    left:0; right:0; top:14px;
+    height:25px;
+    background:#1c1c1c;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.06), inset 0 -3px 4px rgba(0,0,0,0.5), 0 6px 14px rgba(0,0,0,0.18);
+  }
+  .belt-strip::before, .belt-strip::after{
+    content:"";
+    position:absolute; left:8px; right:8px;
+    height:2px;
+    background:var(--red);
+    opacity:0.9;
+  }
+  .belt-strip::before{top:4px;}
+  .belt-strip::after{bottom:4px;}
+  .belt-knot{
+    position:absolute;
+    left:50%; top:6px;
+    width:70px; height:88px;
+    transform:translateX(-50%);
+    z-index:2;
+  }
+  .belt-tail{
+    position:absolute;
+    top:6px;
+    width:19px;
+    height:64px;
+    background:#1c1c1c;
+    box-shadow: inset 1px 0 0 rgba(255,255,255,0.05), 0 6px 10px rgba(0,0,0,0.22);
+  }
+  .belt-tail::after{
+    content:"";
+    position:absolute;
+    bottom:9px; left:2px; right:2px;
+    height:4px;
+    background:var(--gold);
+  }
+  .belt-tail-left{ left:9px; transform:rotate(-16deg); transform-origin:top center; }
+  .belt-tail-right{ right:9px; transform:rotate(16deg); transform-origin:top center; }
+  .belt-loop{
+    position:absolute;
+    left:50%; top:4px;
+    width:34px; height:20px;
+    background:#151515;
+    border-radius:3px;
+    transform:translateX(-50%);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    z-index:3;
+  }
+
+  /* scorecard / recent notes */
+  .scorecard-section{background:var(--canvas); color:#eee;}
+  .scorecard-section .section-head{border-bottom-color:rgba(255,255,255,0.25);}
+  .scorecard-section .section-head h3{color:#fff;}
+  .scorecard-section .section-head .sub{color:#a9a9ad;}
+  .scorecard{
+    background:var(--towel);
+    color:var(--ink);
+    padding:6px;
+  }
+  .scorecard table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.92rem;
+  }
+  .scorecard thead th{
+    font-family:'Oswald', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-align:left;
+    color:var(--ink-soft);
+    padding:12px 14px;
+    border-bottom:2px solid var(--ink);
+  }
+  .scorecard tbody td{
+    padding:14px 14px;
+    border-bottom:1px dashed var(--line);
+    vertical-align:top;
+  }
+  .scorecard tbody tr:last-child td{border-bottom:none;}
+  .scorecard .date{
+    font-family:'Roboto Mono', monospace;
+    font-size:0.78rem;
+    color:var(--red);
+    white-space:nowrap;
+  }
+  .cta-row{margin-top:22px; text-align:center;}
+  .btn{
+    display:inline-block;
+    font-family:'Oswald', sans-serif;
+    letter-spacing:0.1em;
+    font-size:0.85rem;
+    padding:13px 30px;
+    background:var(--red);
+    color:#fff;
+    border-radius:2px;
+    transition: background .2s ease;
+  }
+  .btn:hover{background:var(--red-deep);}
+
+  /* glossary */
+  .glossary{background:var(--towel);}
+  .terms{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  .term{
+    padding:20px 4px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    gap:16px;
+  }
+  .term .mark{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    color:var(--blue);
+    font-size:0.85rem;
+    min-width:70px;
+  }
+  .term .word{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700;
+    font-size:1.02rem;
+    margin-bottom:4px;
+  }
+  .term .desc{font-size:0.86rem; color:var(--ink-soft);}
+
+  /* footer */
+  footer{
+    background:var(--canvas);
+    color:#cfcfd2;
+    padding:50px 0 30px;
+  }
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:24px;
+    padding-bottom:30px;
+  }
+  footer h5{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    color:#fff;
+    font-size:1.05rem;
+    margin-bottom:6px;
+  }
+  footer .sub{font-family:'Oswald', sans-serif; font-size:0.72rem; letter-spacing:0.14em; color:#8d8d92;}
+  footer nav ul{justify-content:flex-start; padding:0; gap:22px;}
+  footer nav a{border:none; padding:0; font-size:0.8rem; color:#cfcfd2;}
+  footer nav a:hover{color:#fff; background:none;}
+  .copyright{
+    font-family:'Roboto Mono', monospace;
+    font-size:0.72rem;
+    color:#6f6f74;
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:20px;
+  }
+
+  @media (max-width:600px){
+    section{padding:50px 0;}
+    .hero{padding:56px 0 60px;}
+    .footer-grid{flex-direction:column;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="towel">
+      <h1>RING NOTE<span>格闘技学習帳</span></h1>
+    </div>
+  </div>
+  <div class="rope"></div>
+  <nav aria-label="サイト内ナビゲーション">
+    <ul>
+      <li><a href="index.html" class="current">TOP</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">ROUND 01 ― はじまりの記録</p>
+    <h2>殴る・投げる・極める。<br>格闘技を、ルールから学ぶ。</h2>
+    <p class="lead">ボクシングのジャブ一発にも、柔道の一本にも、積み重ねてきた理論がある。観るだけでは気づけなかった技の意味を、ノートに整理しながら学んでいく記録帳です。</p>
+    <div class="hero-card">
+      <p class="round">CORNER MEMO</p>
+      <p>赤コーナーは「今学んでいる技術」、青コーナーは「これから学びたい分野」。ページを行き来しながら、少しずつ知識を積み上げています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <p>格闘技は種目によって競技のルールも、技の哲学もまったく違う。同じ「打つ」でもボクシングとムエタイでは重心の使い方が違うし、同じ「倒す」でも柔道とレスリングでは狙う崩し方が違う。そうした違いを一つひとつ調べて、自分の言葉で書き留めていくのがこのサイトの目的です。</p>
+    <p>選手として競技経験があるわけではなく、あくまで「観る側」からの学習記録。試合を見て気になった技、読んだ本で知った用語、練習見学で教えてもらったコツなど、雑多な気づきをコーナーごとに整理しています。</p>
+  </div>
+</section>
+
+<section class="disciplines">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="num">01</span>
+      <h3>学びのコーナー</h3>
+      <span class="sub">Disciplines</span>
+    </div>
+    <div class="grid">
+      <div class="card corner-red">
+        <span class="tag">RED CORNER</span>
+        <h4>ボクシング</h4>
+        <p>ジャブ・ストレート・フックの基本と、ステップワークによる距離の管理を学習中。</p>
+      </div>
+      <div class="card corner-blue">
+        <span class="tag">BLUE CORNER</span>
+        <h4>キックボクシング</h4>
+        <p>パンチに加えてローキック・ミドルキックが加わることで変わる間合いの取り方を調査中。</p>
+      </div>
+      <div class="card corner-red">
+        <span class="tag">RED CORNER</span>
+        <h4>柔道</h4>
+        <p>投げ技の分類と「崩し・作り・掛け」の三段階の考え方を整理している。</p>
+      </div>
+      <div class="card corner-blue">
+        <span class="tag">BLUE CORNER</span>
+        <h4>ブラジリアン柔術</h4>
+        <p>寝技の基本ポジションと関節技・絞め技の名称をこれから学びたい分野。</p>
+      </div>
+      <div class="card corner-red">
+        <span class="tag">RED CORNER</span>
+        <h4>ムエタイ</h4>
+        <p>肘・膝を含めた8つの武器と、クリンチの攻防について勉強中。</p>
+      </div>
+      <div class="card corner-blue">
+        <span class="tag">BLUE CORNER</span>
+        <h4>総合格闘技（MMA）</h4>
+        <p>打撃と組み技を行き来する試合展開の読み方を、他競技の知識と繋げながら理解したい。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="belt-section">
+  <div class="wrap">
+    <p class="belt-caption">Belt Rank ― まだ白帯<strong>いつか黒帯を締めるまでの記録</strong></p>
+    <div class="belt-wrap">
+      <div class="belt-strip"></div>
+      <div class="belt-knot">
+        <span class="belt-loop"></span>
+        <span class="belt-tail belt-tail-left"></span>
+        <span class="belt-tail belt-tail-right"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scorecard-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="num">02</span>
+      <h3>最近のノート</h3>
+      <span class="sub">Latest Entries</span>
+    </div>
+    <div class="scorecard">
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Entry</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date">2026.08.01</td>
+            <td>ジャブの役割は「攻撃」より「管理」だと知った日。距離・リズム・視界、三つ同時にコントロールする技だった。</td>
+          </tr>
+          <tr>
+            <td class="date">2026.07.24</td>
+            <td>柔道の「崩し」を初めてちゃんと理解できた気がする。力で投げるのではなく、先に体勢を崩しておく発想。</td>
+          </tr>
+          <tr>
+            <td class="date">2026.07.15</td>
+            <td>ムエタイのテーピングと蹴りの脛の使い方について、練習見学で教わったことをまとめた。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cta-row">
+      <a href="blog.html" class="btn">続きを読む</a>
+    </div>
+  </div>
+</section>
+
+<section class="glossary">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="num">03</span>
+      <h3>今週の用語ノート</h3>
+      <span class="sub">Glossary</span>
+    </div>
+    <div class="terms">
+      <div class="term">
+        <span class="mark">BOXING</span>
+        <div>
+          <p class="word">ジャブ</p>
+          <p class="desc">前手で軽く放つ突き。攻撃だけでなく、間合いを測り相手の反応を探る役割を持つ。</p>
+        </div>
+      </div>
+      <div class="term">
+        <span class="mark">JUDO</span>
+        <div>
+          <p class="word">一本</p>
+          <p class="desc">技の完成度が最も高い判定。これが決まればそのまま勝敗が決まる、柔道における最高評価。</p>
+        </div>
+      </div>
+      <div class="term">
+        <span class="mark">MUAY THAI</span>
+        <div>
+          <p class="word">ローキック</p>
+          <p class="desc">相手の太もも外側を狙う蹴り。一撃の重さより、蓄積させて足を使えなくすることに意味がある。</p>
+        </div>
+      </div>
+      <div class="term">
+        <span class="mark">MMA / BJJ</span>
+        <div>
+          <p class="word">タップアウト</p>
+          <p class="desc">関節技や絞め技を極められた際に、体や床を叩いて参りを伝える合図。安全に競技を続けるための重要なルール。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>RING NOTE</h5>
+        <p class="sub">格闘技学習帳 by Azalea Creative Room</p>
+      </div>
+      <nav aria-label="フッターナビゲーション">
+        <ul>
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="blog.html">BLOG</a></li>
+          <li><a href="gallery.html">GALLERY</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="rope thin"></div>
+    <p class="copyright" style="margin-top:20px;">© 2026 RING NOTE ― Azalea Creative Room. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
