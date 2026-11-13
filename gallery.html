@@ -109,6 +109,57 @@
     padding-bottom:16px;
     border-bottom:1px solid var(--line);
   }
+  .report-box{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    margin-bottom:38px;
+    padding:22px 26px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:6px solid var(--red);
+    position:relative;
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .report-box::after{
+    content:"";
+    position:absolute;
+    left:-6px; right:0; bottom:0;
+    height:5px;
+    background:linear-gradient(90deg, var(--red), var(--blue));
+  }
+  .report-box:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 26px rgba(0,0,0,0.12);
+  }
+  .report-box .r-badge{
+    flex-shrink:0;
+    font-family:'Oswald', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    color:#fff;
+    background:var(--blue);
+    padding:6px 12px;
+    text-transform:uppercase;
+  }
+  .report-box .r-text{flex:1; min-width:0;}
+  .report-box .r-text h4{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size:1.2rem;
+  }
+  .report-box .r-text p{
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .report-box .r-arrow{
+    font-family:'Oswald', sans-serif;
+    font-size:0.8rem;
+    letter-spacing:0.12em;
+    color:var(--red);
+    white-space:nowrap;
+  }
   .g-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
@@ -189,6 +240,9 @@
 
   @media (max-width:600px){
     .gallery-section{padding:44px 0 60px;}
+    .report-box{flex-wrap:wrap; gap:12px; padding:20px 18px;}
+    .report-box .r-text{flex-basis:100%; order:2;}
+    .report-box .r-arrow{order:3;}
     .footer-grid{flex-direction:column;}
   }
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
@@ -223,6 +277,15 @@
 
 <section class="gallery-section">
   <div class="wrap">
+    <a class="report-box" href="report1.html">
+      <span class="r-badge">Report 01</span>
+      <div class="r-text">
+        <h4>格闘技の種類一覧</h4>
+        <p>ボクシングから柔術まで、格闘技の種類を一覧でまとめた特集ページ。</p>
+      </div>
+      <span class="r-arrow">READ →</span>
+    </a>
+
     <p class="filter-note">ALL ENTRIES ― 6 items</p>
     <div class="g-grid">
 
