@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>格闘技の種類一覧 ― RING NOTE</title>
+<meta name="description" content="ボクシングから柔術まで、格闘技の種類を名前・国・解説でまとめた一覧。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: #c31432;
+    --red-deep: #8f0f24;
+    --blue: #16305c;
+    --blue-deep: #0d1e3d;
+    --towel: #faf8f3;
+    --canvas: #16181c;
+    --ink: #232323;
+    --ink-soft: #5a5a5a;
+    --gold: #c9a24b;
+    --line: rgba(0,0,0,0.08);
+    --maxw: 1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP', sans-serif;
+    color:var(--ink);
+    background:var(--towel);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'Oswald', sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    font-weight:600;
+    text-transform:uppercase;
+  }
+
+  /* ===== ROPE + TOWEL HEADER ===== */
+  .rope{
+    height:14px; width:100%;
+    background:repeating-linear-gradient(90deg, var(--red) 0 46px, var(--towel) 46px 92px, var(--blue) 92px 138px, var(--towel) 138px 184px);
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.25), inset 0 -2px 3px rgba(0,0,0,0.15);
+  }
+  .rope.thin{height:6px;}
+  header{position:relative; background:var(--canvas); overflow:visible;}
+  .header-inner{max-width:var(--maxw); margin:0 auto; padding:0 28px 26px; position:relative;}
+  .towel{
+    position:relative; margin:-2px auto 0; width:min(340px, 78%);
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 2px, transparent 2px 5px), linear-gradient(180deg, #ffffff, var(--towel));
+    box-shadow: 0 18px 34px rgba(0,0,0,0.45), 0 2px 0 rgba(0,0,0,0.05) inset;
+    transform: rotate(-1.4deg); transform-origin: top center;
+    padding:20px 22px 26px; border-radius:2px 2px 0 0;
+  }
+  .towel::before{
+    content:""; position:absolute; top:10px; left:14px; right:14px; height:5px;
+    background: repeating-linear-gradient(90deg, var(--red) 0 18px, transparent 18px 22px, var(--blue) 22px 40px, transparent 40px 44px);
+    opacity:0.85;
+  }
+  .towel::after{
+    content:""; position:absolute; left:0; right:0; bottom:-9px; height:12px;
+    background-image: linear-gradient(135deg, var(--towel) 50%, transparent 50%), linear-gradient(-135deg, var(--towel) 50%, transparent 50%);
+    background-size: 11px 12px; background-position: 0 0, 0 0; background-repeat: repeat-x;
+    filter: drop-shadow(0 3px 2px rgba(0,0,0,0.25));
+  }
+  .towel h1{
+    font-family:'Zen Kaku Gothic New', sans-serif; font-weight:900;
+    font-size: clamp(1.5rem, 4.6vw, 2.05rem); letter-spacing: 0.02em;
+    text-align:center; color:var(--ink); padding-top:6px;
+  }
+  .towel h1 span{
+    display:block; font-family:'Oswald', sans-serif; font-weight:700;
+    font-size:0.85rem; letter-spacing:0.32em; color:var(--ink-soft); margin-top:8px;
+  }
+  nav{padding:38px 0 20px;}
+  nav ul{list-style:none; display:flex; justify-content:center; gap:6px; flex-wrap:wrap;}
+  nav a{
+    font-family:'Oswald', sans-serif; font-size:0.82rem; letter-spacing:0.12em; color:#e9e9ea;
+    padding:9px 18px; border:1px solid rgba(255,255,255,0.18); border-radius:999px; transition: all .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{ border-color:var(--red); background:rgba(195,20,50,0.18); color:#fff; }
+  nav a.current{background:var(--red); border-color:var(--red); color:#fff;}
+
+  /* ===== PAGE HERO ===== */
+  .page-hero{
+    background:linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 46%, var(--blue) 50%, var(--red-deep) 54%, var(--red) 100%);
+    padding:52px 0 46px; color:#fff;
+  }
+  .page-hero .eyebrow{color:#ffe3b0; opacity:0.9;}
+  .page-hero h2{
+    font-family:'Zen Kaku Gothic New', sans-serif; font-weight:900;
+    font-size:clamp(1.6rem, 4.4vw, 2.3rem); margin-top:10px;
+  }
+  .page-hero p{margin-top:12px; max-width:52ch; color:#f1eee6; opacity:0.94; font-size:0.95rem;}
+
+  /* ===== LIST ===== */
+  .report-main{padding:56px 0 80px;}
+  .list-wrap{background:#fff; border:1px solid var(--line); padding:6px;}
+  table{width:100%; border-collapse:collapse; font-size:0.93rem;}
+  thead th{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700;
+    font-size:0.82rem;
+    letter-spacing:0.12em;
+    text-align:left;
+    color:#fff;
+    background:var(--canvas);
+    padding:12px 16px;
+  }
+  thead th:nth-child(1){border-bottom:3px solid var(--red);}
+  thead th:nth-child(2){border-bottom:3px solid var(--towel);}
+  thead th:nth-child(3){border-bottom:3px solid var(--blue);}
+  tbody td{
+    padding:16px;
+    border-bottom:1px dashed var(--line);
+    vertical-align:top;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr.group td{
+    background:var(--towel);
+    font-family:'Oswald', sans-serif;
+    font-size:0.74rem;
+    letter-spacing:0.2em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    padding:10px 16px;
+    border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr.group:first-child td{border-top:none;}
+  td.name{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size:1.02rem;
+    white-space:nowrap;
+    width:18%;
+  }
+  td.name small{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    font-weight:500;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  td.country{
+    width:16%;
+    color:var(--blue);
+    font-weight:500;
+    white-space:nowrap;
+  }
+  td.desc{color:var(--ink);}
+  tbody tr:not(.group):hover td{background:rgba(195,20,50,0.035);}
+
+  .back-link{
+    display:inline-block; margin-top:34px;
+    font-family:'Oswald', sans-serif; font-size:0.82rem; letter-spacing:0.1em;
+    color:var(--ink-soft); padding:9px 18px; border:1px solid rgba(0,0,0,0.18);
+    transition:all .2s ease;
+  }
+  .back-link:hover{color:var(--red); border-color:var(--red);}
+
+  /* footer */
+  footer{background:var(--canvas); color:#cfcfd2; padding:50px 0 30px;}
+  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; padding-bottom:30px;}
+  footer h5{font-family:'Zen Kaku Gothic New', sans-serif; color:#fff; font-size:1.05rem; margin-bottom:6px;}
+  footer .sub{font-family:'Oswald', sans-serif; font-size:0.72rem; letter-spacing:0.14em; color:#8d8d92;}
+  footer nav{padding:0;}
+  footer nav ul{justify-content:flex-start; padding:0; gap:22px;}
+  footer nav a{border:none; padding:0; font-size:0.8rem; color:#cfcfd2;}
+  footer nav a:hover{color:#fff; background:none;}
+  .copyright{
+    font-family:'Roboto Mono', monospace; font-size:0.72rem; color:#6f6f74;
+    border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; margin-top:20px;
+  }
+
+  /* mobile: 行をカード状に */
+  @media (max-width:700px){
+    .report-main{padding:40px 0 60px;}
+    .list-wrap{padding:0; background:transparent; border:none;}
+    table, tbody, tr, td{display:block; width:100%;}
+    thead{display:none;}
+    tbody tr:not(.group){
+      background:#fff;
+      border:1px solid var(--line);
+      border-left:4px solid var(--red);
+      margin-bottom:12px;
+      padding:14px 16px 12px;
+    }
+    tbody tr:nth-child(even):not(.group){border-left-color:var(--blue);}
+    tbody td{padding:0; border:none;}
+    td.name{width:100%; white-space:normal;}
+    td.country{width:100%; font-size:0.82rem; margin:2px 0 8px;}
+    td.country::before{content:"国：";color:var(--ink-soft);}
+    td.desc{font-size:0.9rem;}
+    tbody tr.group{margin:22px 0 10px;}
+    tbody tr.group td{border:none; border-bottom:2px solid var(--ink); background:transparent; padding:0 0 6px;}
+    tbody tr:not(.group):hover td{background:none;}
+    .footer-grid{flex-direction:column;}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="towel">
+      <h1>RING NOTE<span>格闘技学習帳</span></h1>
+    </div>
+  </div>
+  <div class="rope"></div>
+  <nav aria-label="サイト内ナビゲーション">
+    <ul>
+      <li><a href="index.html">TOP</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html" class="current">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Report 01</p>
+    <h2>格闘技の種類一覧</h2>
+    <p>打撃・投げ・寝技・武器術まで、世界各地で生まれた格闘技を名前・国・解説でまとめました。発祥には諸説あるものも含みます。</p>
+  </div>
+</section>
+
+<main class="report-main">
+  <div class="wrap">
+    <div class="list-wrap">
+      <table>
+        <thead>
+          <tr><th>名前</th><th>国</th><th>解説</th></tr>
+        </thead>
+        <tbody>
+
+          <tr class="group"><td colspan="3">Striking ― 打撃系</td></tr>
+
+          <tr>
+            <td class="name">ボクシング<small>BOXING</small></td>
+            <td class="country">イギリス</td>
+            <td class="desc">拳によるパンチだけで戦う競技。近代ルールは19世紀の英国で整えられた。ステップワークと防御技術が重視される。</td>
+          </tr>
+          <tr>
+            <td class="name">キックボクシング<small>KICKBOXING</small></td>
+            <td class="country">日本・アメリカ</td>
+            <td class="desc">パンチに加えてキックも使う打撃格闘技。1960年代に日本でムエタイと空手を土台に発展し、アメリカでも独自のルールが生まれた。</td>
+          </tr>
+          <tr>
+            <td class="name">ムエタイ<small>MUAY THAI</small></td>
+            <td class="country">タイ</td>
+            <td class="desc">パンチ・キック・肘・膝の「8つの武器」で戦うタイの国技。首相撲（クリンチ）からの膝蹴りも大きな特徴。</td>
+          </tr>
+          <tr>
+            <td class="name">空手<small>KARATE</small></td>
+            <td class="country">日本（沖縄）</td>
+            <td class="desc">突き・蹴り・受けを中心とする徒手の武道。沖縄で発展した唐手が本土に伝わり、現在は型と組手の両方が競われる。</td>
+          </tr>
+          <tr>
+            <td class="name">テコンドー<small>TAEKWONDO</small></td>
+            <td class="country">韓国</td>
+            <td class="desc">跳び蹴りや回し蹴りなど足技を主体とする武道。オリンピックの正式種目にもなっている。</td>
+          </tr>
+          <tr>
+            <td class="name">サバット<small>SAVATE</small></td>
+            <td class="country">フランス</td>
+            <td class="desc">靴を履いて蹴りとパンチを使うフランスの格闘技。「フレンチボクシング」とも呼ばれる。</td>
+          </tr>
+          <tr>
+            <td class="name">ラウェイ<small>LETHWEI</small></td>
+            <td class="country">ミャンマー</td>
+            <td class="desc">ミャンマーの伝統格闘技。ほぼ素手で戦い、頭突きも認められる世界的にも珍しいルール。</td>
+          </tr>
+          <tr>
+            <td class="name">散打（サンダ）<small>SANDA</small></td>
+            <td class="country">中国</td>
+            <td class="desc">中国武術をもとにした競技化された打撃格闘技。パンチ・キックに加えて投げ技も使える。</td>
+          </tr>
+
+          <tr class="group"><td colspan="3">Grappling ― 投げ・組み技・寝技系</td></tr>
+
+          <tr>
+            <td class="name">柔道<small>JUDO</small></td>
+            <td class="country">日本</td>
+            <td class="desc">1882年に嘉納治五郎が創始。投げ技と寝技で一本を目指す。「精力善用」「自他共栄」の理念を持つ。</td>
+          </tr>
+          <tr>
+            <td class="name">ブラジリアン柔術<small>BRAZILIAN JIU-JITSU</small></td>
+            <td class="country">ブラジル</td>
+            <td class="desc">日本から伝わった柔術をもとに、寝技を中心に発展した格闘技。関節技や絞め技で勝敗を決める。</td>
+          </tr>
+          <tr>
+            <td class="name">レスリング<small>WRESTLING</small></td>
+            <td class="country">古代ギリシャ（起源）</td>
+            <td class="desc">相手の両肩をマットにつけることなどで勝敗を決める組み技。古代オリンピックでも行われた最古級の格闘技のひとつ。</td>
+          </tr>
+          <tr>
+            <td class="name">サンボ<small>SAMBO</small></td>
+            <td class="country">ソビエト連邦（ロシア）</td>
+            <td class="desc">各地の格闘技を取り入れて旧ソ連で体系化された競技。投げ技と関節技が中心で、独特のジャケットを着用する。</td>
+          </tr>
+          <tr>
+            <td class="name">相撲<small>SUMO</small></td>
+            <td class="country">日本</td>
+            <td class="desc">土俵の外に出すか、足の裏以外を土につけさせて勝つ日本の国技。神事としての側面も持つ。</td>
+          </tr>
+          <tr>
+            <td class="name">合気道<small>AIKIDO</small></td>
+            <td class="country">日本</td>
+            <td class="desc">植芝盛平が大成した武道。相手の力を利用して投げたり押さえたりする。基本的に試合を行わない流派が多い。</td>
+          </tr>
+
+          <tr class="group"><td colspan="3">Mixed &amp; Others ― 総合・その他</td></tr>
+
+          <tr>
+            <td class="name">総合格闘技（MMA）<small>MIXED MARTIAL ARTS</small></td>
+            <td class="country">ブラジル・アメリカ</td>
+            <td class="desc">打撃・投げ・寝技のすべてが認められる競技。ブラジルのバーリトゥードの流れをくみ、1990年代のUFCで世界的に広まった。</td>
+          </tr>
+          <tr>
+            <td class="name">パンクラチオン<small>PANKRATION</small></td>
+            <td class="country">古代ギリシャ</td>
+            <td class="desc">古代オリンピックの種目だった総合格闘技の原型。打撃と組み技の両方が認められていた。</td>
+          </tr>
+          <tr>
+            <td class="name">中国武術（カンフー）<small>KUNG FU</small></td>
+            <td class="country">中国</td>
+            <td class="desc">少林拳や太極拳など数多くの流派を持つ中国の武術の総称。套路（型）の演武と実戦の両面がある。</td>
+          </tr>
+          <tr>
+            <td class="name">カポエイラ<small>CAPOEIRA</small></td>
+            <td class="country">ブラジル</td>
+            <td class="desc">音楽とダンスの要素を併せ持つ格闘技。アフリカ系の人々の間で発展し、地面に手をついた蹴り技が特徴。</td>
+          </tr>
+          <tr>
+            <td class="name">クラヴ・マガ<small>KRAV MAGA</small></td>
+            <td class="country">イスラエル</td>
+            <td class="desc">イスラエル軍で採用された実戦的な護身術。競技ではなく、自己防衛を目的としている。</td>
+          </tr>
+          <tr>
+            <td class="name">剣道<small>KENDO</small></td>
+            <td class="country">日本</td>
+            <td class="desc">竹刀と防具を用い、面・小手・胴・突きを打ち合う武道。礼法や残心も重んじられる。</td>
+          </tr>
+          <tr>
+            <td class="name">カリ／エスクリマ<small>KALI / ESKRIMA</small></td>
+            <td class="country">フィリピン</td>
+            <td class="desc">フィリピンの武器術。棒やナイフを使う技術が中心で、素手の技にも応用される。</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <a class="back-link" href="gallery.html">← GALLERYに戻る</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>RING NOTE</h5>
+        <p class="sub">格闘技学習帳 by Azalea Creative Room</p>
+      </div>
+      <nav aria-label="フッターナビゲーション">
+        <ul>
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="blog.html">BLOG</a></li>
+          <li><a href="gallery.html">GALLERY</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="rope thin"></div>
+    <p class="copyright">© 2026 RING NOTE ― Azalea Creative Room. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
