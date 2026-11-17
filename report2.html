@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>格闘技に関する人物 ― RING NOTE</title>
+<meta name="description" content="柔道・合気道の創始者からボクシングの名王者まで、格闘技の歴史に名を残した人物の一覧。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: #c31432;
+    --red-deep: #8f0f24;
+    --blue: #16305c;
+    --blue-deep: #0d1e3d;
+    --towel: #faf8f3;
+    --canvas: #16181c;
+    --ink: #232323;
+    --ink-soft: #5a5a5a;
+    --gold: #c9a24b;
+    --line: rgba(0,0,0,0.08);
+    --maxw: 1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP', sans-serif;
+    color:var(--ink);
+    background:var(--towel);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'Oswald', sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    font-weight:600;
+    text-transform:uppercase;
+  }
+
+  /* ===== ROPE + TOWEL HEADER ===== */
+  .rope{
+    height:14px; width:100%;
+    background:repeating-linear-gradient(90deg, var(--red) 0 46px, var(--towel) 46px 92px, var(--blue) 92px 138px, var(--towel) 138px 184px);
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.25), inset 0 -2px 3px rgba(0,0,0,0.15);
+  }
+  .rope.thin{height:6px;}
+  header{position:relative; background:var(--canvas); overflow:visible;}
+  .header-inner{max-width:var(--maxw); margin:0 auto; padding:0 28px 26px; position:relative;}
+  .towel{
+    position:relative; margin:-2px auto 0; width:min(340px, 78%);
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 2px, transparent 2px 5px), linear-gradient(180deg, #ffffff, var(--towel));
+    box-shadow: 0 18px 34px rgba(0,0,0,0.45), 0 2px 0 rgba(0,0,0,0.05) inset;
+    transform: rotate(-1.4deg); transform-origin: top center;
+    padding:20px 22px 26px; border-radius:2px 2px 0 0;
+  }
+  .towel::before{
+    content:""; position:absolute; top:10px; left:14px; right:14px; height:5px;
+    background: repeating-linear-gradient(90deg, var(--red) 0 18px, transparent 18px 22px, var(--blue) 22px 40px, transparent 40px 44px);
+    opacity:0.85;
+  }
+  .towel::after{
+    content:""; position:absolute; left:0; right:0; bottom:-9px; height:12px;
+    background-image: linear-gradient(135deg, var(--towel) 50%, transparent 50%), linear-gradient(-135deg, var(--towel) 50%, transparent 50%);
+    background-size: 11px 12px; background-position: 0 0, 0 0; background-repeat: repeat-x;
+    filter: drop-shadow(0 3px 2px rgba(0,0,0,0.25));
+  }
+  .towel h1{
+    font-family:'Zen Kaku Gothic New', sans-serif; font-weight:900;
+    font-size: clamp(1.5rem, 4.6vw, 2.05rem); letter-spacing: 0.02em;
+    text-align:center; color:var(--ink); padding-top:6px;
+  }
+  .towel h1 span{
+    display:block; font-family:'Oswald', sans-serif; font-weight:700;
+    font-size:0.85rem; letter-spacing:0.32em; color:var(--ink-soft); margin-top:8px;
+  }
+  nav{padding:38px 0 20px;}
+  nav ul{list-style:none; display:flex; justify-content:center; gap:6px; flex-wrap:wrap;}
+  nav a{
+    font-family:'Oswald', sans-serif; font-size:0.82rem; letter-spacing:0.12em; color:#e9e9ea;
+    padding:9px 18px; border:1px solid rgba(255,255,255,0.18); border-radius:999px; transition: all .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{ border-color:var(--red); background:rgba(195,20,50,0.18); color:#fff; }
+  nav a.current{background:var(--red); border-color:var(--red); color:#fff;}
+
+  /* ===== PAGE HERO ===== */
+  .page-hero{
+    background:linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 46%, var(--blue) 50%, var(--red-deep) 54%, var(--red) 100%);
+    padding:52px 0 46px; color:#fff;
+  }
+  .page-hero .eyebrow{color:#ffe3b0; opacity:0.9;}
+  .page-hero h2{
+    font-family:'Zen Kaku Gothic New', sans-serif; font-weight:900;
+    font-size:clamp(1.6rem, 4.4vw, 2.3rem); margin-top:10px;
+  }
+  .page-hero p{margin-top:12px; max-width:52ch; color:#f1eee6; opacity:0.94; font-size:0.95rem;}
+
+  /* ===== LIST ===== */
+  .report-main{padding:56px 0 80px;}
+  .list-wrap{background:#fff; border:1px solid var(--line); padding:6px;}
+  table{width:100%; border-collapse:collapse; font-size:0.93rem;}
+  thead th{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700;
+    font-size:0.82rem;
+    letter-spacing:0.12em;
+    text-align:left;
+    color:#fff;
+    background:var(--canvas);
+    padding:12px 16px;
+  }
+  thead th:nth-child(1){border-bottom:3px solid var(--red);}
+  thead th:nth-child(2){border-bottom:3px solid var(--towel);}
+  thead th:nth-child(3){border-bottom:3px solid var(--towel);}
+  thead th:nth-child(4){border-bottom:3px solid var(--blue);}
+  tbody td{
+    padding:16px;
+    border-bottom:1px dashed var(--line);
+    vertical-align:top;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr.group td{
+    background:var(--towel);
+    font-family:'Oswald', sans-serif;
+    font-size:0.74rem;
+    letter-spacing:0.2em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    padding:10px 16px;
+    border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr.group:first-child td{border-top:none;}
+  td.name{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size:1.02rem;
+    white-space:nowrap;
+    width:22%;
+  }
+  td.name small{
+    display:block;
+    font-family:'Oswald', sans-serif;
+    font-weight:500;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  td.year{
+    width:9%;
+    font-family:'Roboto Mono', monospace;
+    font-size:0.85rem;
+    color:var(--red);
+    white-space:nowrap;
+  }
+  td.country{
+    width:16%;
+    color:var(--blue);
+    font-weight:500;
+    white-space:nowrap;
+  }
+  td.desc{color:var(--ink);}
+  tbody tr:not(.group):hover td{background:rgba(195,20,50,0.035);}
+
+  .back-link{
+    display:inline-block; margin-top:34px;
+    font-family:'Oswald', sans-serif; font-size:0.82rem; letter-spacing:0.1em;
+    color:var(--ink-soft); padding:9px 18px; border:1px solid rgba(0,0,0,0.18);
+    transition:all .2s ease;
+  }
+  .back-link:hover{color:var(--red); border-color:var(--red);}
+
+  /* footer */
+  footer{background:var(--canvas); color:#cfcfd2; padding:50px 0 30px;}
+  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; padding-bottom:30px;}
+  footer h5{font-family:'Zen Kaku Gothic New', sans-serif; color:#fff; font-size:1.05rem; margin-bottom:6px;}
+  footer .sub{font-family:'Oswald', sans-serif; font-size:0.72rem; letter-spacing:0.14em; color:#8d8d92;}
+  footer nav{padding:0;}
+  footer nav ul{justify-content:flex-start; padding:0; gap:22px;}
+  footer nav a{border:none; padding:0; font-size:0.8rem; color:#cfcfd2;}
+  footer nav a:hover{color:#fff; background:none;}
+  .copyright{
+    font-family:'Roboto Mono', monospace; font-size:0.72rem; color:#6f6f74;
+    border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; margin-top:20px;
+  }
+
+  /* mobile: 行をカード状に */
+  @media (max-width:700px){
+    .report-main{padding:40px 0 60px;}
+    .list-wrap{padding:0; background:transparent; border:none;}
+    table, tbody, tr, td{display:block; width:100%;}
+    thead{display:none;}
+    tbody tr:not(.group){
+      background:#fff;
+      border:1px solid var(--line);
+      border-left:4px solid var(--red);
+      margin-bottom:12px;
+      padding:14px 16px 12px;
+    }
+    tbody tr:nth-child(even):not(.group){border-left-color:var(--blue);}
+    tbody td{padding:0; border:none;}
+    td.name{width:100%; white-space:normal;}
+    td.year{width:100%; font-size:0.8rem; margin-top:2px;}
+    td.year::before{content:"没年：";font-family:'Noto Sans JP',sans-serif;color:var(--ink-soft);}
+    td.country{width:100%; font-size:0.82rem; margin:0 0 8px;}
+    td.country::before{content:"国：";color:var(--ink-soft);}
+    td.desc{font-size:0.9rem;}
+    tbody tr.group{margin:22px 0 10px;}
+    tbody tr.group td{border:none; border-bottom:2px solid var(--ink); background:transparent; padding:0 0 6px;}
+    tbody tr:not(.group):hover td{background:none;}
+    .footer-grid{flex-direction:column;}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="towel">
+      <h1>RING NOTE<span>格闘技学習帳</span></h1>
+    </div>
+  </div>
+  <div class="rope"></div>
+  <nav aria-label="サイト内ナビゲーション">
+    <ul>
+      <li><a href="index.html">TOP</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html" class="current">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Report 02</p>
+    <h2>格闘技に関する人物</h2>
+    <p>創始者や普及者、名選手など、格闘技の歴史に名を残した人物を人物・没年・国・解説でまとめました。国は主な活動の拠点を基準にしています。</p>
+  </div>
+</section>
+
+<main class="report-main">
+  <div class="wrap">
+    <div class="list-wrap">
+      <table>
+        <thead>
+          <tr><th>人物</th><th>没年</th><th>国</th><th>解説</th></tr>
+        </thead>
+        <tbody>
+
+          <tr class="group"><td colspan="4">Founders ― 創始者・普及者</td></tr>
+
+          <tr>
+            <td class="name">嘉納治五郎<small>KANO JIGORO</small></td>
+            <td class="year">1938年</td>
+            <td class="country">日本</td>
+            <td class="desc">柔道の創始者。1882年に講道館を設立し、柔術を教育的な武道として体系化した。日本人初のIOC委員でもある。</td>
+          </tr>
+
+          <tr>
+            <td class="name">植芝盛平<small>UESHIBA MORIHEI</small></td>
+            <td class="year">1969年</td>
+            <td class="country">日本</td>
+            <td class="desc">合気道の開祖。柔術や剣術を修め、相手の力を和らげて制する武道として合気道を大成させた。</td>
+          </tr>
+
+          <tr>
+            <td class="name">船越義珍<small>FUNAKOSHI GICHIN</small></td>
+            <td class="year">1957年</td>
+            <td class="country">日本（沖縄）</td>
+            <td class="desc">沖縄の唐手を本土に広め、松濤館流の基礎を築いた。空手の普及に大きく貢献した人物。</td>
+          </tr>
+
+          <tr>
+            <td class="name">前田光世<small>MAEDA MITSUYO</small></td>
+            <td class="year">1941年</td>
+            <td class="country">日本</td>
+            <td class="desc">講道館柔道の使い手として海外を巡り、異種格闘技戦で名を上げた。ブラジルに柔道・柔術を伝えた。</td>
+          </tr>
+
+          <tr>
+            <td class="name">カルロス・グレイシー<small>CARLOS GRACIE</small></td>
+            <td class="year">1994年</td>
+            <td class="country">ブラジル</td>
+            <td class="desc">前田光世から技術を学び、弟のエリオらとブラジリアン柔術の土台を築いたグレイシー柔術の祖。</td>
+          </tr>
+
+          <tr>
+            <td class="name">エリオ・グレイシー<small>HELIO GRACIE</small></td>
+            <td class="year">2009年</td>
+            <td class="country">ブラジル</td>
+            <td class="desc">小柄な体でも戦えるよう柔術の技術を磨き直し、ブラジリアン柔術を発展させた。</td>
+          </tr>
+
+          <tr>
+            <td class="name">葉問（イップ・マン）<small>IP MAN</small></td>
+            <td class="year">1972年</td>
+            <td class="country">中国（香港で活動）</td>
+            <td class="desc">詠春拳の達人として知られ、香港で多くの弟子を育てた。ブルース・リーの師でもある。</td>
+          </tr>
+
+          <tr>
+            <td class="name">ブルース・リー<small>BRUCE LEE</small></td>
+            <td class="year">1973年</td>
+            <td class="country">アメリカ（香港で活動）</td>
+            <td class="desc">截拳道（ジークンドー）を提唱した武道家で、映画俳優。格闘技を世界に広めるきっかけを作った。</td>
+          </tr>
+
+          <tr>
+            <td class="name">ワシリー・オシチェプコフ<small>VASILI OSHCHEPKOV</small></td>
+            <td class="year">1937年</td>
+            <td class="country">ソビエト連邦（ロシア）</td>
+            <td class="desc">講道館で柔道を学んだ後、ロシアに戻って指導。サンボ成立の基礎を作った人物のひとり。</td>
+          </tr>
+
+          <tr class="group"><td colspan="4">Champions ― 名選手</td></tr>
+
+          <tr>
+            <td class="name">ジャック・ジョンソン<small>JACK JOHNSON</small></td>
+            <td class="year">1946年</td>
+            <td class="country">アメリカ</td>
+            <td class="desc">1908年に黒人として初めてボクシングのヘビー級世界王者になった。人種の壁に挑んだ先駆者。</td>
+          </tr>
+
+          <tr>
+            <td class="name">ジョー・ルイス<small>JOE LOUIS</small></td>
+            <td class="year">1981年</td>
+            <td class="country">アメリカ</td>
+            <td class="desc">1937年から1949年まで長期にわたりヘビー級王座を守り続けた名王者。</td>
+          </tr>
+
+          <tr>
+            <td class="name">ロッキー・マルシアノ<small>ROCKY MARCIANO</small></td>
+            <td class="year">1969年</td>
+            <td class="country">アメリカ</td>
+            <td class="desc">49戦全勝のまま引退したヘビー級王者。プロボクシングで無敗のまま引退した数少ない例として知られる。</td>
+          </tr>
+
+          <tr>
+            <td class="name">シュガー・レイ・ロビンソン<small>SUGAR RAY ROBINSON</small></td>
+            <td class="year">1989年</td>
+            <td class="country">アメリカ</td>
+            <td class="desc">スピードと技巧を兼ね備えた名王者。階級を超えて史上最強の候補に挙げられることが多い。</td>
+          </tr>
+
+          <tr>
+            <td class="name">モハメド・アリ<small>MUHAMMAD ALI</small></td>
+            <td class="year">2016年</td>
+            <td class="country">アメリカ</td>
+            <td class="desc">華麗なフットワークと巧みな話術で知られたヘビー級王者。リング内外で世界的な影響力を持った。</td>
+          </tr>
+
+          <tr>
+            <td class="name">ジョージ・フォアマン<small>GEORGE FOREMAN</small></td>
+            <td class="year">2025年</td>
+            <td class="country">アメリカ</td>
+            <td class="desc">強打で知られたヘビー級王者。1994年に45歳で王座に返り咲き、最年長王者の記録を作った。</td>
+          </tr>
+
+          <tr>
+            <td class="name">木村政彦<small>KIMURA MASAHIKO</small></td>
+            <td class="year">1993年</td>
+            <td class="country">日本</td>
+            <td class="desc">全日本柔道選手権を制した名柔道家。1951年にブラジルでエリオ・グレイシーと対戦したことでも知られる。</td>
+          </tr>
+
+          <tr class="group"><td colspan="4">Swordsmen & Sumo ― 剣術・相撲</td></tr>
+
+          <tr>
+            <td class="name">塚原卜伝<small>TSUKAHARA BOKUDEN</small></td>
+            <td class="year">1571年</td>
+            <td class="country">日本</td>
+            <td class="desc">戦国時代の剣豪。新当流を興し、諸国を巡って剣の道を究めたと伝えられる。</td>
+          </tr>
+
+          <tr>
+            <td class="name">宮本武蔵<small>MIYAMOTO MUSASHI</small></td>
+            <td class="year">1645年</td>
+            <td class="country">日本</td>
+            <td class="desc">二刀流の剣術・二天一流の創始者。兵法書『五輪書』を著したことでも知られる。</td>
+          </tr>
+
+          <tr>
+            <td class="name">山岡鉄舟<small>YAMAOKA TESSHU</small></td>
+            <td class="year">1888年</td>
+            <td class="country">日本</td>
+            <td class="desc">幕末から明治にかけての剣・禅・書の達人。無刀流を開き、明治天皇の侍従も務めた。</td>
+          </tr>
+
+          <tr>
+            <td class="name">双葉山定次<small>FUTABAYAMA SADAJI</small></td>
+            <td class="year">1968年</td>
+            <td class="country">日本</td>
+            <td class="desc">69連勝という大相撲の連勝記録を打ち立てた第35代横綱。</td>
+          </tr>
+
+          <tr>
+            <td class="name">大鵬幸喜<small>TAIHO KOKI</small></td>
+            <td class="year">2013年</td>
+            <td class="country">日本</td>
+            <td class="desc">昭和を代表する第48代横綱。幕内最高優勝を32回達成した。</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <a class="back-link" href="gallery.html">← GALLERYに戻る</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>RING NOTE</h5>
+        <p class="sub">格闘技学習帳 by Azalea Creative Room</p>
+      </div>
+      <nav aria-label="フッターナビゲーション">
+        <ul>
+          <li><a href="index.html">TOP</a></li>
+          <li><a href="blog.html">BLOG</a></li>
+          <li><a href="gallery.html">GALLERY</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="rope thin"></div>
+    <p class="copyright">© 2026 RING NOTE ― Azalea Creative Room. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
